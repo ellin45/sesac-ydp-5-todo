@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Todo from './Todo';
-import AddTodo from './AddTodo'
+import AddTodo from './AddTodo';
 
 function App() {
   const [todoItems, setTodoItems] = useState([
@@ -20,25 +20,29 @@ function App() {
       done: true,
     },
     {
-      id:4,
+      id: 4,
       title: '백엔드 연습',
       done: false,
-    }
+    },
   ]);
 
   const addItem = (newItem) => {
     console.log(newItem);
 
-    newItem.id = todoItems.length +1;
-    newItem.done = false
+    newItem.id = todoItems.length + 1;
+    newItem.done = false;
 
-    setTodoItems([...todoItems, newItem])
+    setTodoItems([...todoItems, newItem]);
+  };
+  //과제 목록 삭제하기
+  const deleteItem = (setTodoItems) => {
+    setTodoItems.filter((setTodoItems) => (deleteItem = { deleteItem }));
   };
   return (
     <div className="App">
-      <AddTodo addItem={addItem}/>
+      <AddTodo addItem={addItem} />
       {todoItems.map((item) => (
-        <Todo key={item.id} item={item} />
+        <Todo key={item.id} item={item} deleteItem={deleteItem} />
       ))}
     </div>
   );
