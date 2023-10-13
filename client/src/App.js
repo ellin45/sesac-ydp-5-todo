@@ -4,7 +4,7 @@ import AddTodo from './AddTodo';
 import axios from 'axios';
 import './styles/App.scss';
 function App() {
-  console.log(process.env.REACT_APP_DB_HOST);
+  // console.log(process.env.REACT_APP_DB_HOST);
   const [todoItems, setTodoItems] = useState([]);
 
   useEffect(() => {
@@ -12,6 +12,7 @@ function App() {
       const res = await axios.get(`${process.env.REACT_APP_DB_HOST}/todos`);
       setTodoItems(res.data);
     };
+
     getTodos();
   }, []);
 
