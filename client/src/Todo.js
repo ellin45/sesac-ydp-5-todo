@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function Todo({ item, deleteItem }) {
   const [todoItem, setTodoItem] = useState(item);
-  const { id, title, done } = todoItem;
+  const {id, title, done} = todoItem;
   const [readOnly, setReadOnly] = useState(true);
 
   const onDeleteButtonClick = () => {
@@ -28,13 +28,13 @@ export default function Todo({ item, deleteItem }) {
   };
   //Checkbox 상태 업데이트
   const checkboxEventHandler = (e) => {
-    const {done, ...rest} = todoItem;
+    const { done, ...rest } = todoItem;
     setTodoItem({
       done: e.target.checked,
       ...rest,
-    })
+    });
     console.log(e);
-  }
+  };
   return (
     <div>
       <input
