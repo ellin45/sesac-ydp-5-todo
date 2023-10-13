@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .input {
+    border: none;
+    width: 70%;
+    padding: 10px;
+    margin: 11px;
+    border-bottom: 1px solid #afafaf;
+    font-size: x-small;
+    outline: none;
+  }
+  .deleteBtn {
+    border: none;
+    width: 12%;
+    height: 10%;
+    height: auto;
+    border-radius: 6px;
+    border: none;
+    color: rgb(118, 101, 246);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: x-small;
+
+  }
+}

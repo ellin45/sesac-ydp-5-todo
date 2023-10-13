@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './styles/Todo.scss';
 export default function Todo({ item, deleteItem, updateItem }) {
   const [todoItem, setTodoItem] = useState(item);
   const { id, title, done } = todoItem;
@@ -24,7 +24,7 @@ export default function Todo({ item, deleteItem, updateItem }) {
   const editKeyEventHandler = (e) => {
     if (e.key === 'Enter') {
       setReadOnly(true);
-      updateItem(todoItem) // 엔터키 누르면 저장
+      updateItem(todoItem); // 엔터키 누르면 저장
     }
   };
   //Checkbox 상태 업데이트
@@ -38,15 +38,10 @@ export default function Todo({ item, deleteItem, updateItem }) {
     updateItem(updateItem); // 체크박스 변경시 저장
   };
 
-  const todoCount = (todoItems) => {
-    const setTodoCount = todoItems.map((id) => id.length);
-    setTodoItem(setTodoCount);
-  };
   return (
-    <>
-   {/* <div className='leftTodo'>{todoItem.id.length()}</div> */}
-    <div>
+    <div className='container'>
       <input
+      className='checkbox'
         type="checkbox"
         name={`todo${id}`}
         id={`todo${id}`}
@@ -54,6 +49,7 @@ export default function Todo({ item, deleteItem, updateItem }) {
         onClick={checkboxEventHandler}
       ></input>
       <input
+      className='input'
         type="text"
         value={todoItem.title}
         readOnly={readOnly}
@@ -62,8 +58,7 @@ export default function Todo({ item, deleteItem, updateItem }) {
         onKeyDown={editKeyEventHandler}
       ></input>
       <label htmlFor={`todo${id}`}></label>
-      <button onClick={onDeleteButtonClick}>DELETE</button>
+      <button className='deleteBtn' onClick={onDeleteButtonClick}>DELETE</button>
     </div>
-    </>
   );
 }

@@ -1,0 +1,23 @@
+@import './_util';
+
+
+.App{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .header{
+    text-align: center;
+    background-color: blueviolet;
+    margin: 20px;
+    padding: 20px;
+    color: white;
+    border-radius: 6px;
+
+  }
+  .count{
+    color : rgb(118, 101, 246);
+    margin: 25px;
+    text-align: start;
+  }
+}

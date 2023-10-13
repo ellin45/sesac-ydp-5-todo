@@ -1,0 +1,17 @@
+@import './_util';
+
+.AddTodo {
+  width: 90%;
+}
+.addBtn {
+  border: none;
+  width: 12%;
+  height: 10%;
+  height: auto;
+  border-radius: 6px;
+  border: none;
+  color: rgb(118, 101, 246);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: x-small;
+}

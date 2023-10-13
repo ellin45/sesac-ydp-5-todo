@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
 import axios from 'axios';
-
+import './styles/App.scss';
 function App() {
   console.log(process.env.REACT_APP_DB_HOST);
   const [todoItems, setTodoItems] = useState([]);
@@ -50,7 +50,9 @@ function App() {
   };
   return (
     <div className="App">
+    <header className='header'>My Todo App</header>
       <AddTodo addItem={addItem} />
+      <div className='count'>Todo개수 : {todoItems.length} 😃</div>
       {/* todoItems 반복, props(todo 객체)로 자식 컴포넌트에 데이터 전달 */}
       {todoItems.map((todoItems) => (
         <Todo
