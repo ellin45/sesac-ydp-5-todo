@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-export default function Todo({ item, deleteItem }) {
+export default function Todo({ item, deleteItem, updateItem }) {
   const [todoItem, setTodoItem] = useState(item);
-  const {id, title, done} = todoItem;
+  const { id, title, done } = todoItem;
   const [readOnly, setReadOnly] = useState(true);
 
   const onDeleteButtonClick = () => {
@@ -24,18 +24,27 @@ export default function Todo({ item, deleteItem }) {
   const editKeyEventHandler = (e) => {
     if (e.key === 'Enter') {
       setReadOnly(true);
+      updateItem(todoItem) // 엔터키 누르면 저장
     }
   };
   //Checkbox 상태 업데이트
   const checkboxEventHandler = (e) => {
     const { done, ...rest } = todoItem;
-    setTodoItem({
+    updateItem({
       done: e.target.checked,
       ...rest,
     });
-    console.log(e);
+    setTodoItem(updateItem);
+    updateItem(updateItem); // 체크박스 변경시 저장
+  };
+
+  const todoCount = (todoItems) => {
+    const setTodoCount = todoItems.map((id) => id.length);
+    setTodoItem(setTodoCount);
   };
   return (
+    <>
+   {/* <div className='leftTodo'>{todoItem.id.length()}</div> */}
     <div>
       <input
         type="checkbox"
@@ -55,5 +64,6 @@ export default function Todo({ item, deleteItem }) {
       <label htmlFor={`todo${id}`}></label>
       <button onClick={onDeleteButtonClick}>DELETE</button>
     </div>
+    </>
   );
 }

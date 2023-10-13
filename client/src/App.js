@@ -1,49 +1,64 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
+import axios from 'axios';
 
 function App() {
-  const [todoItems, setTodoItems] = useState([
-    {
-      id: 1,
-      title: 'my todo1',
-      done: false,
-    },
-    {
-      id: 2,
-      title: 'my todo2',
-      done: false,
-    },
-    {
-      id: 3,
-      title: 'my todo3',
-      done: true,
-    },
-    {
-      id: 4,
-      title: '백엔드 연습',
-      done: false,
-    },
-  ]);
+  console.log(process.env.REACT_APP_DB_HOST);
+  const [todoItems, setTodoItems] = useState([]);
 
-  const addItem = (newItem) => {
-    console.log(newItem);
+  useEffect(() => {
+    const getTodos = async () => {
+      const res = await axios.get(`${process.env.REACT_APP_DB_HOST}/todos`);
+      setTodoItems(res.data);
+    };
+    getTodos();
+  }, []);
 
-    newItem.id = todoItems.length + 1;
-    newItem.done = false;
+  // todoItems 상태에 새로운 Todo 추가
+  const addItem = async (newItem) => {
+    // console.log(newItem);
 
+    // //newItem id 키 값, newItem done 키 값 추가
+    // newItem.id = todoItems.length + 1;
+    // newItem.done = false;
+
+    // // todoItems 배열에 newItem 추가
+    // setTodoItems([...todoItems, newItem]);
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_DB_HOST}/todo`,
+      newItem
+    );
+    console.log(res);
     setTodoItems([...todoItems, newItem]);
   };
-  //todoItem 상태에 특정 투두를 삭제 하는 일
-  const deleteItem = (targetItems) => {
-    const newTodoItems = todoItems.filter((item)=> item.id !== targetItems.id);
+
+  const deleteItem = async (targetItem) => {
+    await axios.delete(
+      `${process.env.REACT_APP_DB_HOST}/todo/${targetItem.id}`
+    );
+    const newTodoItems = todoItems.filter((item) => item.id !== targetItem.id);
     setTodoItems(newTodoItems);
+  };
+
+  const updateItem = async (targetItem) => {
+    await axios.patch(
+      `${process.env.REACT_APP_DB_HOST}/todo/${targetItem.id}`,
+      targetItem
+    ); //axios.path('url',{})
   };
   return (
     <div className="App">
       <AddTodo addItem={addItem} />
-      {todoItems.map((item) => (
-        <Todo key={item.id} item={item} deleteItem={deleteItem} />
+      {/* todoItems 반복, props(todo 객체)로 자식 컴포넌트에 데이터 전달 */}
+      {todoItems.map((todoItems) => (
+        <Todo
+          key={todoItems.id}
+          item={todoItems}
+          deleteItem={deleteItem}
+          updateItem={updateItem}
+        />
       ))}
     </div>
   );
