@@ -34,9 +34,10 @@ function App() {
 
     setTodoItems([...todoItems, newItem]);
   };
-  //과제 목록 삭제하기
-  const deleteItem = (setTodoItems) => {
-    setTodoItems.filter((setTodoItems) => (deleteItem = { deleteItem }));
+  //todoItem 상태에 특정 투두를 삭제 하는 일
+  const deleteItem = (targetItems) => {
+    const newTodoItems = todoItems.filter((item)=> item.id !== targetItems.id);
+    setTodoItems(newTodoItems);
   };
   return (
     <div className="App">
