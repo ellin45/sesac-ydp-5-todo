@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const getTodos = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_DB_HOST}/todos`);
+      const res = await axios.get(`${process.env.REACT_APP_DB_HOST}/api/todos`);
       setTodoItems(res.data);
     };
 
@@ -28,7 +28,7 @@ function App() {
     // setTodoItems([...todoItems, newItem]);
 
     const res = await axios.post(
-      `${process.env.REACT_APP_DB_HOST}/todo`,
+      `${process.env.REACT_APP_DB_HOST}/api/todo`,
       newItem
     );
     console.log(res);
@@ -37,7 +37,7 @@ function App() {
 
   const deleteItem = async (targetItem) => {
     await axios.delete(
-      `${process.env.REACT_APP_DB_HOST}/todo/${targetItem.id}`
+      `${process.env.REACT_APP_DB_HOST}/api/todo/${targetItem.id}`
     );
     const newTodoItems = todoItems.filter((item) => item.id !== targetItem.id);
     setTodoItems(newTodoItems);
